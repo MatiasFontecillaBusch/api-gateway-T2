@@ -6,6 +6,7 @@ import compression from 'compression';
 import morgan from 'morgan';
 import AppError from '#utils/appErrors.js';
 import globalErrorMiddleware from '#middleware/globalErrorMiddleware.js';
+import careersRouter from '#routes/careersRoutes.js';
 
 const app = express();
 
@@ -32,6 +33,8 @@ app.use(compression());
 app.get('/', (req, res) => {
   res.status(200).send('OK');
 });
+
+app.use('/careers', careersRouter);
 
 app.all('*', (req, res, next) => {
   next(

@@ -1,0 +1,64 @@
+syntax = "proto3";
+
+service SubjectRelationships {
+  rpc CreateSubjectRelationship (CreateSubjectRelationshipRequest) returns (SubjectRelationship) {}
+  rpc GetSubjectRelationship (GetSubjectRelationshipRequest) returns (SubjectRelationship) {}
+  rpc UpdateSubjectRelationship (UpdateSubjectRelationshipRequest) returns (SubjectRelationship) {}
+  rpc DeleteSubjectRelationship (DeleteSubjectRelationshipRequest) returns (SubjectRelationshipResponse) {}
+  rpc GetAllSubjectRelationships (Empty) returns (ListSubjectRelationshipsResponse) {}
+  rpc GetPostRequisitesMap (Empty) returns (PostRequisitesMapResponse) {}
+  rpc GetPreRequisitesMap (Empty) returns (PreRequisitesMapResponse) {}
+}
+
+message Empty {}
+
+message SubjectRelationship {
+  string id = 1;
+  string subjectCode = 2;
+  string preSubjectCode = 3;
+  string createdAt = 4;
+  string updatedAt = 5;
+  string deletedAt = 6;
+  int32 version = 7;
+}
+
+message CreateSubjectRelationshipRequest {
+  string subjectCode = 1;
+  string preSubjectCode = 2;
+}
+
+message GetSubjectRelationshipRequest {
+  string id = 1;
+}
+
+message UpdateSubjectRelationshipRequest {
+  string id = 1;
+  string subjectCode = 2;
+  string preSubjectCode = 3;
+}
+
+message DeleteSubjectRelationshipRequest {
+  string id = 1;
+}
+
+message ListSubjectRelationshipsResponse {
+  repeated SubjectRelationship subjectRelationships = 1;
+}
+
+message SubjectRelationshipResponse {
+  bool success = 1;
+}
+
+message RequisiteList {
+  repeated string codes = 1;
+}
+
+
+message PostRequisitesMapResponse {
+  map<string, RequisiteList> data = 1;
+}
+
+message PreRequisitesMapResponse {
+  map<string, RequisiteList> data = 1;
+}
+
