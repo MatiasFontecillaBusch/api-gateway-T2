@@ -7,6 +7,7 @@ import morgan from 'morgan';
 import AppError from '#utils/appErrors.js';
 import globalErrorMiddleware from '#middleware/globalErrorMiddleware.js';
 import careersRouter from '#routes/careersRoutes.js';
+import subjectsRouter from '#routes/subjectsRoutes.js';
 
 const app = express();
 
@@ -35,7 +36,7 @@ app.get('/', (req, res) => {
 });
 
 app.use('/careers', careersRouter);
-
+app.use('/subjects', subjectsRouter);
 app.all('*', (req, res, next) => {
   next(
     new AppError(`Ruta no encontrada ${req.originalUrl} no encontrada`, 404),
