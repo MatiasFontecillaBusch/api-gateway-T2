@@ -1,6 +1,7 @@
 /* eslint-disable import/first */
 /* eslint-disable no-console */
 import dotenv from 'dotenv';
+import app from './app.js';
 
 const environments = {
   development: 'Desarrollo',
@@ -14,8 +15,6 @@ process.on('uncaughtException', (err) => {
 });
 
 dotenv.config({ path: './.env' });
-
-import app from './app.js';
 
 export default app;
 

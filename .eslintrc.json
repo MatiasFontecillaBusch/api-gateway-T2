@@ -30,12 +30,6 @@
         "map": [["#", "./src/*"]],
         "extensions": [".js", ".json"]
       }
-    },
-    "import/resolver": {
-      "alias": {
-        "map": [["#", "./src"]],
-        "extensions": [".js", ".json"]
-      }
     }
   },
   "parserOptions": {
