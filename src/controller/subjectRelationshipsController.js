@@ -22,3 +22,16 @@ export const getPreRequisitesMap = catchAsync(async (req, res, next) => {
     return res.status(200).json({ status: 'success', data: response.data });
   });
 });
+
+// Get Pre-Requisites/objects Map
+export const getPreRequisitesMapObjects = catchAsync(async (req, res, next) => {
+  subjectRelationshipsStub.GetAllSubjectRelationships({}, (error, response) => {
+    if (error) {
+      return next(error);
+    }
+
+    return res
+      .status(200)
+      .json({ status: 'success', data: response.subjectRelationships });
+  });
+});
