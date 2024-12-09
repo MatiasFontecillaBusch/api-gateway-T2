@@ -1,5 +1,3 @@
-/* eslint-disable import/first */
-/* eslint-disable no-console */
 import dotenv from 'dotenv';
 import app from './app.js';
 

@@ -2,8 +2,8 @@
   "name": "api-gateway-t2",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "type": "module",
+  "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",

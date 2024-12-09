@@ -6,14 +6,14 @@ import compression from 'compression';
 import morgan from 'morgan';
 import AppError from '#utils/appErrors.js';
 import globalErrorMiddleware from '#middleware/globalErrorMiddleware.js';
-import careersRouter from '#routes/careersRoutes.js';
-import subjectsRouter from '#routes/subjectsRoutes.js';
+
+import { userClient } from './grpcClient.js';
+import userRouter from '#routes/userRoutes.js';
 
 const app = express();
 
 app.use(helmet());
 
-// 1) GLOBAL MIDDLEWARES
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(ExpressMongoSanitize());
@@ -35,8 +35,10 @@ app.get('/', (req, res) => {
   res.status(200).send('OK');
 });
 
-app.use('/careers', careersRouter);
-app.use('/subjects', subjectsRouter);
+app.locals.userClient = userClient;
+
+app.use('/users', userRouter);
+
 app.all('*', (req, res, next) => {
   next(
     new AppError(`Ruta no encontrada ${req.originalUrl} no encontrada`, 404),
