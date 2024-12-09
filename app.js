@@ -6,9 +6,9 @@ import compression from 'compression';
 import morgan from 'morgan';
 import AppError from '#utils/appErrors.js';
 import globalErrorMiddleware from '#middleware/globalErrorMiddleware.js';
-
-import { userClient } from './grpcClient.js';
+import { userClient, authClient } from './grpcClient.js';
 import userRouter from '#routes/userRoutes.js';
+import authRouter from '#routes/authRoutes.js';
 
 const app = express();
 
@@ -36,8 +36,10 @@ app.get('/', (req, res) => {
 });
 
 app.locals.userClient = userClient;
+app.locals.authClient = authClient;
 
 app.use('/users', userRouter);
+app.use('/auth', authRouter);
 
 app.all('*', (req, res, next) => {
   next(
