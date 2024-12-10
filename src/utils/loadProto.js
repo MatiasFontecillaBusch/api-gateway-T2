@@ -1,5 +1,5 @@
+import { loadPackageDefinition } from '@grpc/grpc-js';
 import protoLoader from '@grpc/proto-loader';
-import grpc from '@grpc/grpc-js';
 import path from 'path';
 
 export function loadProto(serviceName) {
@@ -12,5 +12,5 @@ export function loadProto(serviceName) {
     oneofs: true,
   });
 
-  return grpc.loadPackageDefinition(packageDefinition)[serviceName];
+  return loadPackageDefinition(packageDefinition)[serviceName];
 }
