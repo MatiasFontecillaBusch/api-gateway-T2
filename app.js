@@ -11,6 +11,8 @@ import userRouter from '#routes/userRoutes.js';
 import authRouter from '#routes/authRoutes.js';
 import { loadClients } from './grpcClient.js';
 import apiGatewayMiddleware from '#middleware/apiGatewayMiddleware.js';
+import subjectsRouter from '#routes/subjectsRoutes.js';
+import careersRouter from '#routes/careersRoutes.js';
 
 dotenv.config({ path: './.env' });
 
@@ -43,6 +45,8 @@ loadClients(app);
 
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
+app.use('/subjects', subjectsRouter);
+app.use('/careers', careersRouter);
 
 app.use(apiGatewayMiddleware);
 
