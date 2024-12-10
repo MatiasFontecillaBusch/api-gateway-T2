@@ -1,19 +1,29 @@
-import grpc from '@grpc/grpc-js';
 import { loadProto } from '#utils/loadProto.js';
-import dotenv from 'dotenv';
-
-dotenv.config();
+import { credentials } from '@grpc/grpc-js';
 
 export const loadClients = (app) => {
   const userProto = loadProto('user');
   app.locals.usersClient = new userProto.UserService(
-    process.env.USER_SERVICE_URL,
-    grpc.credentials.createInsecure(),
+    process.env.USERS_SERVICE_URL,
+    credentials.createInsecure(),
   );
 
   const authProto = loadProto('auth');
   app.locals.authClient = new authProto.AuthService(
-    process.env.USER_SERVICE_URL,
-    grpc.credentials.createInsecure(),
+    process.env.USERS_SERVICE_URL,
+    credentials.createInsecure(),
   );
+
+  const careersProto = loadProto('careers');
+  app.locals.careersClient = new careersProto.Careers(
+    process.env.CAREERS_SERVICE_URL,
+    credentials.createInsecure(),
+  );
+
+  const subjectRelationshipsProto = loadProto('subjectRelationships');
+  app.locals.subjectRelationshipsStub =
+    new subjectRelationshipsProto.SubjectRelationships(
+      process.env.CAREERS_SERVICE_URL,
+      credentials.createInsecure(),
+    );
 };
