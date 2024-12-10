@@ -1,4 +1,5 @@
 import express from 'express';
+import dotenv from 'dotenv';
 import helmet from 'helmet';
 import ExpressMongoSanitize from 'express-mongo-sanitize';
 import hpp from 'hpp';
@@ -6,9 +7,12 @@ import compression from 'compression';
 import morgan from 'morgan';
 import AppError from '#utils/appErrors.js';
 import globalErrorMiddleware from '#middleware/globalErrorMiddleware.js';
-import { userClient, authClient } from './grpcClient.js';
 import userRouter from '#routes/userRoutes.js';
 import authRouter from '#routes/authRoutes.js';
+import { loadClients } from './grpcClient.js';
+import apiGatewayMiddleware from '#middleware/apiGatewayMiddleware.js';
+
+dotenv.config({ path: './.env' });
 
 const app = express();
 
@@ -35,11 +39,12 @@ app.get('/', (req, res) => {
   res.status(200).send('OK');
 });
 
-app.locals.userClient = userClient;
-app.locals.authClient = authClient;
+loadClients(app);
 
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
+
+app.use(apiGatewayMiddleware);
 
 app.all('*', (req, res, next) => {
   next(

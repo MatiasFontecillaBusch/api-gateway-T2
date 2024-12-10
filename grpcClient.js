@@ -4,17 +4,16 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-const userProto = loadProto('user');
-const authProto = loadProto('auth');
+export const loadClients = (app) => {
+  const userProto = loadProto('user');
+  app.locals.usersClient = new userProto.UserService(
+    process.env.USER_SERVICE_URL,
+    grpc.credentials.createInsecure(),
+  );
 
-const userClient = new userProto.UserService(
-  process.env.USER_SERVICE_URL,
-  grpc.credentials.createInsecure(),
-);
-
-const authClient = new authProto.AuthService(
-  process.env.USER_SERVICE_URL,
-  grpc.credentials.createInsecure(),
-);
-
-export { userClient, authClient };
+  const authProto = loadProto('auth');
+  app.locals.authClient = new authProto.AuthService(
+    process.env.USER_SERVICE_URL,
+    grpc.credentials.createInsecure(),
+  );
+};

@@ -1,9 +1,9 @@
 import { cleanObject } from '#utils/cleanObject.js';
 
 const getAllUsers = (req, res, next) => {
-  const userClient = req.app.locals.userClient;
+  const usersClient = req.app.locals.usersClient;
 
-  userClient.GetAll({}, (error, response) => {
+  usersClient.GetAll({}, (error, response) => {
     if (error) {
       return next(error);
     }
@@ -13,9 +13,9 @@ const getAllUsers = (req, res, next) => {
 
 const getUserProfile = (req, res, next) => {
   const { id } = req.params;
-  const userClient = req.app.locals.userClient;
+  const usersClient = req.app.locals.usersClient;
 
-  userClient.Profile({ id }, (error, response) => {
+  usersClient.Profile({ id }, (error, response) => {
     if (error) {
       return next(error);
     }
@@ -24,11 +24,11 @@ const getUserProfile = (req, res, next) => {
 };
 
 const updateUserProfile = (req, res, next) => {
-  const userClient = req.app.locals.userClient;
+  const usersClient = req.app.locals.usersClient;
   const { id } = req.params;
   const { name, firstLastName, secondLastName } = req.body;
 
-  userClient.UpdateProfile(
+  usersClient.UpdateProfile(
     { id, name, firstLastName, secondLastName },
     (error, response) => {
       if (error) {
