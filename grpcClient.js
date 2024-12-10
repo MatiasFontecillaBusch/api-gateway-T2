@@ -21,9 +21,15 @@ export const loadClients = (app) => {
   );
 
   const subjectRelationshipsProto = loadProto('subjectRelationships');
-  app.locals.subjectRelationshipsStub =
+  app.locals.subjectRelationshipsClient =
     new subjectRelationshipsProto.SubjectRelationships(
       process.env.CAREERS_SERVICE_URL,
       credentials.createInsecure(),
     );
+
+  const subjectsProto = loadProto('subjects');
+  app.locals.subjectsClient = new subjectsProto.Subjects(
+    process.env.CAREERS_SERVICE_URL,
+    credentials.createInsecure(),
+  );
 };

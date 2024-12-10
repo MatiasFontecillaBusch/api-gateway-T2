@@ -1,6 +1,6 @@
 syntax = "proto3";
 
-package careers;
+package subjects;
 
 service Subjects {
   rpc CreateSubject (CreateSubjectRequest) returns (Subject) {}
