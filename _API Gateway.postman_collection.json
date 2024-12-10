@@ -1,0 +1,244 @@
+{
+	"info": {
+		"_postman_id": "c2885e19-2179-4d4b-a74d-94ba44746af7",
+		"name": "_API Gateway",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31440030",
+		"_collection_link": "https://a-s-taller-2-vm.postman.co/workspace/A.-S-Taller-2-VM-Workspace~7fe0e064-9d23-4031-864c-9e5d66ba8c59/collection/31440030-c2885e19-2179-4d4b-a74d-94ba44746af7?action=share&source=collection_link&creator=31440030"
+	},
+	"item": [
+		{
+			"name": "Careers",
+			"item": [
+				{
+					"name": "Get Careers",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/careers",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"careers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Subjects",
+			"item": [
+				{
+					"name": "Get Subjects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/subjects",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Post-Requisites Map",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/subjects/postrequisites-map",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"subjects",
+								"postrequisites-map"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pre-Requisites Map",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/subjects/prerequisites-map",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"subjects",
+								"prerequisites-map"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pre-Requisites Map Objects",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/subjects/prerequisites-map/objects",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"subjects",
+								"prerequisites-map",
+								"objects"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth/register",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Get Profile",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/profile",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Progress",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Progress",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
