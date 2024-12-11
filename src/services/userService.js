@@ -12,7 +12,8 @@ const getAllUsers = (req, res, next) => {
 };
 
 const getUserProfile = (req, res, next) => {
-  const { id } = req.user.data.id;
+  const { id } = req.user.data;
+  console.log(id);
   const usersClient = req.app.locals.usersClient;
 
   usersClient.Profile({ id }, (error, response) => {
@@ -25,7 +26,7 @@ const getUserProfile = (req, res, next) => {
 
 const updateUserProfile = (req, res, next) => {
   const usersClient = req.app.locals.usersClient;
-  const { id } = req.user.data.id;
+  const { id } = req.user.data;
   const { name, firstLastName, secondLastName } = req.body;
 
   usersClient.UpdateProfile(
@@ -42,7 +43,7 @@ const updateUserProfile = (req, res, next) => {
 };
 
 const getUserProgress = (req, res, next) => {
-  const { id } = req.user.data.id;
+  const { id } = req.user.data;
   const userClient = req.app.locals.userClient;
 
   userClient.GetProgress({ id }, (error, response) => {
