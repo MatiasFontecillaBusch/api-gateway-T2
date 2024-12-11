@@ -1,10 +1,15 @@
 import express from 'express';
 import userController from '#services/userService.js';
+import { authMiddleware } from '#middleware/authMiddleware.js';
 
 const router = express.Router();
 
-router.patch('/:id', userController.updateUserProfile);
-router.get('/:id/progress', userController.getUserProgress);
-router.patch('/:id/progress', userController.updateUserProgress);
+router.use(authMiddleware);
+router.route('/profile').get(userController.getUserProfile);
+router.put('/update-profile', userController.updateUserProfile);
+router
+  .route('/my-progress')
+  .get(userController.getUserProgress)
+  .patch(userController.updateUserProgress);
 
 export default router;
