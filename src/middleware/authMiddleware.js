@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const authMiddleware = async (req, res, next) => {
+  let token;
   try {
     if (
       req.headers.authorization &&
