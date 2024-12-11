@@ -1,0 +1,503 @@
+{
+	"info": {
+		"_postman_id": "5bb9b2f2-abd6-4bcc-9e91-b4e36a41f193",
+		"name": "_Flujos",
+		"description": "1. Ver todas las carreras, registrarse, iniciar sesión, actualizar su contraseña, volver a  \n    iniciar sesión, ver su perfil, actualizar sus datos de perfil y volver a ver su perfil.\n    \n2. Iniciar sesión, ver todas las carreras, ver su progreso, actualizar su progreso agregando  \n    dos asignaturas, ver nuevamente su progreso, actualizar su progreso eliminando una  \n    asignatura y ver nuevamente su progreso.\n    \n3. Iniciar sesión, ver todas las asignaturas, agregar las primeras dos asignaturas  \n    visualizadas al progreso, ver todas las asignaturas, eliminar la primera asignatura  \n    visualizada, ver nuevamente el progreso.Universidad Católica del Norte  \n    Facultad de Ingeniería y Ciencias Geológicas  \n    Departamento de Ingeniería de Sistemas y Computación\n    \n4. Iniciar sesión, ver perfil, actualizar su perfil intercambiando su nombre y primer  \n    apellido, ver nuevamente su perfil, actualizar su c",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31440030",
+		"_collection_link": "https://a-s-taller-2-vm.postman.co/workspace/A.-S-Taller-2-VM-Workspace~7fe0e064-9d23-4031-864c-9e5d66ba8c59/collection/31440030-5bb9b2f2-abd6-4bcc-9e91-b4e36a41f193?action=share&source=collection_link&creator=31440030"
+	},
+	"item": [
+		{
+			"name": "Flujo 2",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.token) {",
+									"  pm.environment.set(\"JWT\", response.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"rschiefersten2q@ezinearticles.com\",\n    \"password\": \"a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Careers",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/careers",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"careers"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Progress",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"pm.collectionVariables.set(\"currentProgress\", JSON.stringify(response.data));",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Progress",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const addSubjects = []",
+									"addSubjects.push(pm.collectionVariables.get(\"subject1\"));",
+									"addSubjects.push(pm.collectionVariables.get(\"subject2\"));"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addSubjects\": [\n        \"{{subjectId1}}\",\n        \"{{subjectId2}}\"\n    ],\n    \"removeSubjects\": []\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Progress 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"pm.collectionVariables.set(\"newProgress\", JSON.stringify(response.data));",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Progress 2",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addSubjects\": [],\n    \"removeSubjects\": [\"{{subjectId1}}\"]\n}\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Iniciar sesión, ver todas las carreras, ver su progreso, actualizar su progreso agregando  \ndos asignaturas, ver nuevamente su progreso, actualizar su progreso eliminando una  \nasignatura y ver nuevamente su progreso."
+		},
+		{
+			"name": "Flujo 3",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.token) {",
+									"  pm.environment.set(\"JWT\", response.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"rschiefersten2q@ezinearticles.com\",\n    \"password\": \"a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subjects",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.status === \"success\" && response.data.length > 1) {",
+									"  const subjects = response.data",
+									"  pm.collectionVariables.set(\"subject1F3\", subjects[0].code);",
+									"  pm.collectionVariables.set(\"subject2F3\", subjects[1].code);",
+									"} else {",
+									"  pm.collectionVariables.unset(\"subject1\");",
+									"  pm.collectionVariables.unset(\"subject2\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/subjects",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Progress",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Asignaturas agregadas al progreso\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addSubjects\": [\n        \"{{subject1F3}}\",\n        \"{{subject2F3}}\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Subjects 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.status === \"success\" && response.data.length > 1) {",
+									"  const subjects = response.data",
+									"  pm.collectionVariables.set(\"subject1F3\", subjects[0].code);",
+									"  pm.collectionVariables.set(\"subject2F3\", subjects[1].code);",
+									"} else {",
+									"  pm.collectionVariables.unset(\"subject1\");",
+									"  pm.collectionVariables.unset(\"subject2\");",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/subjects",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"subjects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Set Progress 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Asignatura eliminada del progreso\", function () {",
+									"  pm.response.to.have.status(200);",
+									"});",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"addSubjects\": [],\n  \"removeSubjects\": [\"{{subject1F3}}\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Progress",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"my-progress"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Iniciar sesión, ver todas las asignaturas, agregar las primeras dos asignaturas  \nvisualizadas al progreso, ver todas las asignaturas, eliminar la primera asignatura  \nvisualizada, ver nuevamente el progreso."
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "subjectId1",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "subjectId2",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "currentProgress",
+			"value": ""
+		},
+		{
+			"key": "newProgress",
+			"value": ""
+		},
+		{
+			"key": "subject1F3",
+			"value": ""
+		},
+		{
+			"key": "subject2F3",
+			"value": ""
+		}
+	]
+}
