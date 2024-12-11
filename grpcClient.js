@@ -1,5 +1,8 @@
 import { loadProto } from '#utils/loadProto.js';
 import { credentials } from '@grpc/grpc-js';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const loadClients = (app) => {
   const userProto = loadProto('user');

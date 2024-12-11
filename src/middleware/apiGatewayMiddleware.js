@@ -1,5 +1,6 @@
 import cubi12Client from '../../cubi12Client.js';
 
+
 const apiGatewayMiddleware = async (req, res, next) => {
   try {
     const { method, originalUrl, query, body } = req;

@@ -1,4 +1,17 @@
-import { cleanObject } from '../utils/cleanObject.js';
+import accessServiceClient from '../../accessServiceClient.js';
+
+const login = (req, res, next) => {
+  const { email, password } = req.body;
+
+  accessServiceClient
+    .post('/login', { email, password })
+    .then((response) => {
+      res.status(200).json(response.data);
+    })
+    .catch((error) => {
+      next(error);
+    });
+};
 
 const register = (req, res, next) => {
   const authClient = req.app.locals.authClient;
@@ -52,6 +65,7 @@ const updatePassword = (req, res, next) => {
 };
 
 export default {
+  login,
   register,
   updatePassword,
 };
