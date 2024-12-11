@@ -15,6 +15,7 @@ import subjectsRouter from '#routes/subjectsRoutes.js';
 import careersRouter from '#routes/careersRoutes.js';
 import { authMiddleware } from '#middleware/authMiddleware.js';
 import authController from '#services/authService.js';
+import userController from '#services/userService.js';
 
 dotenv.config({ path: './.env' });
 
@@ -47,6 +48,7 @@ loadClients(app);
 
 app.post('/login', authController.login);
 app.use(authMiddleware);
+app.get('/profile', userController.getUserProfile);
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
 app.use('/subjects', subjectsRouter);
