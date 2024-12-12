@@ -44,7 +44,7 @@ const updateUserProfile = (req, res, next) => {
 
 const getUserProgress = (req, res, next) => {
   const { id } = req.user.data;
-  const userClient = req.app.locals.userClient;
+  const userClient = req.app.locals.usersClient;
 
   userClient.GetProgress({ id }, (error, response) => {
     if (error) {
@@ -55,8 +55,9 @@ const getUserProgress = (req, res, next) => {
 };
 
 const updateUserProgress = (req, res, next) => {
-  const userClient = req.app.locals.userClient;
-  const { userId, addSubjects, removeSubjects } = req.body;
+  const userClient = req.app.locals.usersClient;
+  const { id: userId } = req.user.data;
+  const { addSubjects, removeSubjects } = req.body;
 
   userClient.UpdateProgress(
     { userId, addSubjects, removeSubjects },
