@@ -319,7 +319,7 @@
 					"response": []
 				}
 			],
-			"description": "1. Ver todas las carreras, registrarse, iniciar sesión, actualizar su contraseña, volver a  \n    iniciar sesión, ver su perfil, actualizar sus datos de perfil y volver a ver su perfil."
+			"description": "Ver todas las carreras, registrarse, iniciar sesión, actualizar su contraseña, volver a  \niniciar sesión, ver su perfil, actualizar sus datos de perfil y volver a ver su perfil."
 		},
 		{
 			"name": "Flujo 2",
@@ -751,6 +751,249 @@
 				}
 			],
 			"description": "Iniciar sesión, ver todas las asignaturas, agregar las primeras dos asignaturas  \nvisualizadas al progreso, ver todas las asignaturas, eliminar la primera asignatura  \nvisualizada, ver nuevamente el progreso."
+		},
+		{
+			"name": "Flujo 4",
+			"item": [
+				{
+					"name": "Login 1",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.token) {",
+									"  pm.environment.set(\"JWT\", response.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const password = \"AnnaJackson\"\r",
+									"\r",
+									"pm.environment.set(\"password\", password);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"rschiefersten2q@ezinearticles.com\",\n    \"password\": \"{{password}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile 1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Profile",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const names = [\"John\", \"Jane\", \"Alex\", \"Emily\", \"Chris\", \"Sara\", \"Michael\", \"Anna\", \"James\", \"Sophia\"];\r",
+									"const lastNames = [\"Smith\", \"Johnson\", \"Brown\", \"Taylor\", \"Anderson\", \"Thomas\", \"Jackson\", \"White\", \"Harris\", \"Martin\"];\r",
+									"\r",
+									"const randomName = names[Math.floor(Math.random() * names.length)];\r",
+									"const randomFirstLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
+									"\r",
+									"pm.environment.set(\"name\", randomName);\r",
+									"pm.environment.set(\"firstLastName\", randomFirstLastName);\r",
+									"\r",
+									"console.log(\"Generated Name:\", randomName);\r",
+									"console.log(\"Generated First Last Name:\", randomFirstLastName);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"{{name}}\",\r\n  \"firstLastName\": \"{{firstLastName}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"update-profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Profile 2",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"users",
+								"profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Password",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"const name = pm.environment.get(\"name\");\r",
+									"const firstLastName = pm.environment.get(\"firstLastName\");\r",
+									"\r",
+									"const newPassword = `${name}${firstLastName}`;\r",
+									"\r",
+									"pm.environment.set(\"newPassword\", newPassword);\r",
+									"\r",
+									"console.log(\"Name:\", name);\r",
+									"console.log(\"First Last Name:\", firstLastName);\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth",
+								"update-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.token) {",
+									"  pm.environment.set(\"JWT\", response.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"packages": {},
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"rschiefersten2q@ezinearticles.com\",\n    \"password\": \"{{newPassword}}\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"description": "Iniciar sesión, ver perfil, actualizar su perfil intercambiando su nombre y primer  \napellido, ver nuevamente su perfil, actualizar su contraseña como su nombre y primer  \napellido seguidos, iniciar sesión nuevamente."
 		}
 	],
 	"auth": {
