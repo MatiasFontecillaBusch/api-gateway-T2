@@ -22,7 +22,6 @@ const register = (req, res, next) => {
     rut,
     email,
     careerId,
-    roleId,
     password,
     confirmPassword,
   } = req.body;
@@ -35,7 +34,6 @@ const register = (req, res, next) => {
       rut,
       email,
       careerId,
-      roleId,
       password,
       confirmPassword,
     },
@@ -51,10 +49,11 @@ const register = (req, res, next) => {
 
 const updatePassword = (req, res, next) => {
   const authClient = req.app.locals.authClient;
-  const { userId, oldPassword, newPassword } = req.body;
+  const { id } = req.user.data;
+  const { oldPassword, newPassword } = req.body;
 
   authClient.UpdatePassword(
-    { userId, oldPassword, newPassword },
+    { userId: id, oldPassword, newPassword },
     (error, response) => {
       if (error) {
         return next(error);
