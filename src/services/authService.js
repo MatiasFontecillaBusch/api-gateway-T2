@@ -9,6 +9,12 @@ const login = (req, res, next) => {
       res.status(200).json(response.data);
     })
     .catch((error) => {
+      console.log({ error: error });
+      const { response } = error;
+      if (response) {
+        res.status(response.status).json(response.data);
+      }
+
       next(error);
     });
 };
