@@ -64,7 +64,7 @@ const updatePassword = (req, res, next) => {
       if (error) {
         return next(error);
       }
-      res.status(200).json(response);
+      res.status(204).json('');
     },
   );
 };
