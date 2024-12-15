@@ -1,3 +1,4 @@
+import AppError from '#utils/appErrors.js';
 import accessServiceClient from '../../accessServiceClient.js';
 
 const login = (req, res, next) => {
@@ -15,7 +16,9 @@ const login = (req, res, next) => {
         res.status(response.status).json(response.data);
       }
 
-      next(error);
+      return next(
+        new AppError(error?.details ?? 'Algo salio mal', error.code ?? 500),
+      );
     });
 };
 
@@ -45,7 +48,9 @@ const register = (req, res, next) => {
     },
     (error, response) => {
       if (error) {
-        return next(error);
+        return next(
+          new AppError(error?.details ?? 'Algo salio mal', error.code),
+        );
       }
 
       res.status(201).json(response);
@@ -62,7 +67,9 @@ const updatePassword = (req, res, next) => {
     { userId: id, oldPassword, newPassword, confirmNewPassword },
     (error, response) => {
       if (error) {
-        return next(error);
+        return next(
+          new AppError(error?.details ?? 'Algo salio mal', error.code),
+        );
       }
       res.status(204).json('');
     },
