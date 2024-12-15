@@ -1,4 +1,4 @@
-#### API Gateway
+# API Gateway Vicente Alaracón y Matias Fontecilla
 
 Este proyecto es un **API Gateway** desarrollado en Node.js con Express que centraliza la comunicación entre varios microservicios. Utiliza Docker Compose para levantar el entorno completo, incluyendo bases de datos y colas de mensajes.
 
