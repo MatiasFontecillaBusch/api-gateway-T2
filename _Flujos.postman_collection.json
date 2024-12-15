@@ -5,7 +5,7 @@
 		"description": "1. Ver todas las carreras, registrarse, iniciar sesión, actualizar su contraseña, volver a  \n    iniciar sesión, ver su perfil, actualizar sus datos de perfil y volver a ver su perfil.\n    \n2. Iniciar sesión, ver todas las carreras, ver su progreso, actualizar su progreso agregando  \n    dos asignaturas, ver nuevamente su progreso, actualizar su progreso eliminando una  \n    asignatura y ver nuevamente su progreso.\n    \n3. Iniciar sesión, ver todas las asignaturas, agregar las primeras dos asignaturas  \n    visualizadas al progreso, ver todas las asignaturas, eliminar la primera asignatura  \n    visualizada, ver nuevamente el progreso.Universidad Católica del Norte  \n    Facultad de Ingeniería y Ciencias Geológicas  \n    Departamento de Ingeniería de Sistemas y Computación\n    \n4. Iniciar sesión, ver perfil, actualizar su perfil intercambiando su nombre y primer  \n    apellido, ver nuevamente su perfil, actualizar su c",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "29661553",
-		"_collection_link": "https://taller-2-arquitectura-de-sistemas.postman.co/workspace/c491820f-5aad-415f-8e6a-52eaa51fc838/collection/29661553-093348c7-a540-40ef-b798-307422084a6c?action=share&source=collection_link&creator=29661553"
+		"_collection_link": "https://taller-2-arquitectura-de-sistemas.postman.co/workspace/Taller-2---Arquitectura-de-Sist~c491820f-5aad-415f-8e6a-52eaa51fc838/collection/29661553-093348c7-a540-40ef-b798-307422084a6c?action=share&source=collection_link&creator=29661553"
 	},
 	"item": [
 		{
@@ -35,12 +35,40 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const randomEmail = `testuser${Math.floor(Math.random() * 10000)}@example.com`;\r",
+									"const randomEmail = `testuser${Math.floor(Math.random() * 10000)}@ucn.cl`;\r",
 									"\r",
 									"pm.environment.set(\"email\", randomEmail);\r",
 									"pm.environment.set(\"password\", \"password123\");\r",
 									"\r",
-									"console.log(\"Generated email:\", randomEmail);\r",
+									"function generateRut() {\r",
+									"    const numberBase = Math.floor(10000000 + Math.random() * 90000000).toString();\r",
+									"\r",
+									"    function calculateDv(number) {\r",
+									"        let total = 0;\r",
+									"        let multiplier = 2;\r",
+									"\r",
+									"        for (let i = number.length - 1; i >= 0; i--) {\r",
+									"            total += parseInt(number[i]) * multiplier;\r",
+									"            multiplier = multiplier === 7 ? 2 : multiplier + 1;\r",
+									"        }\r",
+									"\r",
+									"        const remainder = total % 11;\r",
+									"        const dv = 11 - remainder;\r",
+									"\r",
+									"        if (dv === 11) return \"0\";\r",
+									"        if (dv === 10) return \"K\";\r",
+									"        return dv.toString();\r",
+									"    }\r",
+									"\r",
+									"    const dv = calculateDv(numberBase);\r",
+									"    return `${numberBase}-${dv}`;\r",
+									"}\r",
+									"\r",
+									"const generatedRut = generateRut();\r",
+									"pm.environment.set(\"rut\", generatedRut);\r",
+									"\r",
+									"console.log(\"Generated RUT:\", generatedRut);\r",
+									"\r",
 									"console.log(\"Generated password:\", \"password123\");"
 								],
 								"type": "text/javascript",
@@ -71,7 +99,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"name\": \"John\",\r\n  \"firstLastName\": \"Doe\",\r\n  \"secondLastName\": \"Smith\",\r\n  \"rut\": \"21821272-2\",\r\n  \"email\": \"{{email}}\",\r\n  \"careerId\": \"666a70d0-8435-47c9-bcbe-5fcbfb79a71d\",\r\n  \"password\": \"{{password}}\",\r\n  \"confirmPassword\": \"{{password}}\"\r\n}\r\n",
+							"raw": "{\r\n  \"name\": \"John\",\r\n  \"firstLastName\": \"Doe\",\r\n  \"secondLastName\": \"Smith\",\r\n  \"rut\": \"{{rut}}\",\r\n  \"email\": \"{{email}}\",\r\n  \"careerId\": \"666a70d0-8435-47c9-bcbe-5fcbfb79a71d\",\r\n  \"password\": \"{{password}}\",\r\n  \"confirmPassword\": \"{{password}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -150,11 +178,11 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const randomPassword = Math.random().toString(36).slice(-8);\r",
+									"const newPassword = \"Password1234\";\r",
 									"\r",
-									"pm.environment.set(\"newPassword\", randomPassword);\r",
+									"pm.environment.set(\"newPassword\", newPassword);\r",
 									"\r",
-									"console.log(\"Generated password:\", randomPassword);\r",
+									"console.log(\"Generated password:\", newPassword);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -167,7 +195,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\"\r\n}",
+							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\",\r\n  \"confirmNewPassword\": \"{{newPassword}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -923,7 +951,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\"\r\n}",
+							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\",\r\n  \"confirmNewPassword\": \"{{newPassword}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"

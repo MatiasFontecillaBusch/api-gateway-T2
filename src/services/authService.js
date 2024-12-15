@@ -56,10 +56,10 @@ const register = (req, res, next) => {
 const updatePassword = (req, res, next) => {
   const authClient = req.app.locals.authClient;
   const { id } = req.user.data;
-  const { oldPassword, newPassword } = req.body;
+  const { oldPassword, newPassword, confirmNewPassword } = req.body;
 
   authClient.UpdatePassword(
-    { userId: id, oldPassword, newPassword },
+    { userId: id, oldPassword, newPassword, confirmNewPassword },
     (error, response) => {
       if (error) {
         return next(error);
