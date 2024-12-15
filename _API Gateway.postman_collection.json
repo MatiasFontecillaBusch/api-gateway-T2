@@ -50,18 +50,19 @@
 					"response": []
 				},
 				{
-					"name": "Get Post-Requisites Map",
+					"name": "Get Pre-Requisites Map Objects",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/subjects/postrequisites-map",
+							"raw": "{{API_GATEWAY_URL}}/subjects/prerequisites-map/objects",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
 								"subjects",
-								"postrequisites-map"
+								"prerequisites-map",
+								"objects"
 							]
 						}
 					},
@@ -86,19 +87,18 @@
 					"response": []
 				},
 				{
-					"name": "Get Pre-Requisites Map Objects",
+					"name": "Get Post-Requisites Map",
 					"request": {
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/subjects/prerequisites-map/objects",
+							"raw": "{{API_GATEWAY_URL}}/subjects/postrequisites-map",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
 								"subjects",
-								"prerequisites-map",
-								"objects"
+								"postrequisites-map"
 							]
 						}
 					},
@@ -111,16 +111,41 @@
 			"item": [
 				{
 					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"let response = pm.response.json();",
+									"if (response.token) {",
+									"  pm.environment.set(\"JWT\", response.token);",
+									"}"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"tseddon2o@disqus.com\",\n    \"password\": \"a\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth",
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"auth"
+								"auth",
+								"login"
 							]
 						}
 					},
@@ -131,6 +156,15 @@
 					"request": {
 						"method": "POST",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"careerId\": \"666a70d0-8435-47c9-bcbe-5fcbfb79a71d\",\n    \"confirmPassword\": \"a21177605-6\",\n    \"email\": \"c@ucn.cl\",\n    \"firstLastName\": \"Pedro\",\n    \"name\": \"Pedro\",\n    \"password\": \"a21177605-6\",\n    \"rut\": \"12801506-K\",\n    \"secondLastName\": \"Pedro\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{API_GATEWAY_URL}}/auth/register",
 							"host": [
@@ -149,6 +183,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n   \"confirmNewPassword\": \"contrasena1\",\n    \"newPassword\": \"contrasena1\",\n    \"oldPassword\": \"a21177605-6\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
 							"host": [
@@ -161,6 +204,46 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{API_GATEWAY_URL}}/auth/logout",
+							"host": [
+								"{{API_GATEWAY_URL}}"
+							],
+							"path": [
+								"auth",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
 				}
 			]
 		},
@@ -173,11 +256,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/profile",
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"users",
 								"profile"
 							]
 						}
@@ -207,6 +291,15 @@
 					"request": {
 						"method": "PATCH",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"addSubjects\": [\n    ],\n    \"removeSubjects\": [\n        \"0832-1120\"\n    ]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{API_GATEWAY_URL}}/users/my-progress",
 							"host": [
@@ -225,6 +318,15 @@
 					"request": {
 						"method": "PUT",
 						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"firstLastName\": \"Jose\",\n    \"name\": \"Manuel\",\n    \"secondLastName\": \"Alcayaja\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
 							"host": [
@@ -238,7 +340,61 @@
 					},
 					"response": []
 				}
+			],
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"type": "text/javascript",
+						"packages": {},
+						"exec": [
+							""
+						]
+					}
+				}
 			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{JWT}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
 		}
 	]
 }

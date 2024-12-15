@@ -43,11 +43,10 @@ app.get('/', (req, res) => {
 
 loadClients(app);
 
-
-app.use('/users', userRouter);
-app.use('/auth', authRouter);
-app.use('/subjects', subjectsRouter);
-app.use('/careers', careersRouter);
+app.use('/api/users', userRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/subjects', subjectsRouter);
+app.use('/api/careers', careersRouter);
 
 app.use(apiGatewayMiddleware);
 
