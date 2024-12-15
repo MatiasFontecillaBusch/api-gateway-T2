@@ -31,19 +31,24 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
 
 #### Instalación y Ejecución
 
-1. **Instalar dependencias**:
+1. **Clonar el repositorio**:
+   ```bash
+   git clone https://github.com/MatiasFontecillaBusch/api-gateway-T2.git
+   ```
+
+2. **Instalar dependencias**:
    ```bash
    npm install
    ```
 
-2. **Levantar servicios con Docker Compose**:
+3. **Levantar servicios con Docker Compose**:
    ```bash
    docker-compose up -d
    ```
 
    Esto levantará los servicios definidos en el archivo `docker-compose.yml`.
 
-3. **Ejecutar el servidor Node.js**:
+4. **Ejecutar el servidor Node.js**:
    ```bash
    npm start
    ```
