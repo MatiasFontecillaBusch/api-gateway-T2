@@ -18,7 +18,6 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
      cp .env.example .env
      ```
    - Personaliza las variables si es necesario, NODE_ENV debe ser "production".
-
 ---
 
 2. **Componentes del entorno de Docker Compose**:
@@ -52,9 +51,6 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
    ```bash
    npm start
    ```
-
-   El servidor estará disponible en [http://localhost:5000](http://localhost:5000).
-
 ---
 
 **Nota Importante:**
