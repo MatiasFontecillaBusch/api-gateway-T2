@@ -208,7 +208,7 @@
 				{
 					"name": "Logout",
 					"request": {
-						"method": "POST",
+						"method": "DELETE",
 						"header": [],
 						"url": {
 							"raw": "{{API_GATEWAY_URL}}/auth/logout",
