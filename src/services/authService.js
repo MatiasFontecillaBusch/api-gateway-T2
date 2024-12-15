@@ -10,10 +10,27 @@ const login = (req, res, next) => {
       res.status(200).json(response.data);
     })
     .catch((error) => {
-      console.log({ error: error });
       const { response } = error;
       if (response) {
-        res.status(response.status).json(response.data);
+        return res.status(response.status).json(response.data);
+      }
+
+      return next(
+        new AppError(error?.details ?? 'Algo salio mal', error.code ?? 500),
+      );
+    });
+};
+
+const logout = (req, res, next) => {
+  accessServiceClient
+    .post('/logout', { token: req.token })
+    .then((response) => {
+      res.status(response.status).json(response.data ?? '');
+    })
+    .catch((error) => {
+      const { response } = error;
+      if (response) {
+        return res.status(response.status).json(response.data);
       }
 
       return next(
@@ -80,4 +97,5 @@ export default {
   login,
   register,
   updatePassword,
+  logout,
 };

@@ -13,7 +13,6 @@ const getAllUsers = (req, res, next) => {
 
 const getUserProfile = (req, res, next) => {
   const { id } = req.user.data;
-  console.log(id);
   const usersClient = req.app.locals.usersClient;
 
   usersClient.Profile({ id }, (error, response) => {

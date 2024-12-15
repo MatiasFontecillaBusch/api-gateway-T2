@@ -28,6 +28,7 @@ export const authMiddleware = async (req, res, next) => {
     );
 
     req.user = response.data;
+    req.token = token;
 
     next();
   } catch (error) {
