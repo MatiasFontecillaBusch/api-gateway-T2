@@ -17,12 +17,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/careers",
+							"raw": "{{API_GATEWAY_URL}}/careers",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"careers"
 							]
 						}
@@ -101,12 +100,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/register",
+							"raw": "{{API_GATEWAY_URL}}/auth/register",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"register"
 							]
@@ -154,12 +152,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"login"
 							]
@@ -206,12 +203,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/update-password",
+							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"update-password"
 							]
@@ -249,12 +245,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"login"
 							]
@@ -268,12 +263,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/apI/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"apI",
 								"users",
 								"profile"
 							]
@@ -322,12 +316,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/users/update-profile",
+							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"users",
 								"update-profile"
 							]
@@ -341,12 +334,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"users",
 								"profile"
 							]
@@ -833,12 +825,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"login"
 							]
@@ -852,12 +843,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"users",
 								"profile"
 							]
@@ -903,12 +893,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/users/update-profile",
+							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"users",
 								"update-profile"
 							]
@@ -922,12 +911,11 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"users",
 								"profile"
 							]
@@ -982,12 +970,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/update-password",
+							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"update-password"
 							]
@@ -1035,12 +1022,11 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
-								"api",
 								"auth",
 								"login"
 							]
