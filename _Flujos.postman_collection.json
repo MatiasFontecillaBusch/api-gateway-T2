@@ -1,11 +1,11 @@
 {
 	"info": {
-		"_postman_id": "647863cf-0933-482b-8cb3-d49fef14bc2f",
+		"_postman_id": "bfa1abdc-5887-4493-97e8-75d84c7016b6",
 		"name": "_Flujos",
 		"description": "1. Ver todas las carreras, registrarse, iniciar sesión, actualizar su contraseña, volver a  \n    iniciar sesión, ver su perfil, actualizar sus datos de perfil y volver a ver su perfil.\n    \n2. Iniciar sesión, ver todas las carreras, ver su progreso, actualizar su progreso agregando  \n    dos asignaturas, ver nuevamente su progreso, actualizar su progreso eliminando una  \n    asignatura y ver nuevamente su progreso.\n    \n3. Iniciar sesión, ver todas las asignaturas, agregar las primeras dos asignaturas  \n    visualizadas al progreso, ver todas las asignaturas, eliminar la primera asignatura  \n    visualizada, ver nuevamente el progreso.Universidad Católica del Norte  \n    Facultad de Ingeniería y Ciencias Geológicas  \n    Departamento de Ingeniería de Sistemas y Computación\n    \n4. Iniciar sesión, ver perfil, actualizar su perfil intercambiando su nombre y primer  \n    apellido, ver nuevamente su perfil, actualizar su c",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "31440030",
-		"_collection_link": "https://a-s-taller-2-vm.postman.co/workspace/A.-S-Taller-2-VM-Workspace~7fe0e064-9d23-4031-864c-9e5d66ba8c59/collection/31440030-647863cf-0933-482b-8cb3-d49fef14bc2f?action=share&source=collection_link&creator=31440030"
+		"_exporter_id": "29661553",
+		"_collection_link": "https://taller-2-arquitectura-de-sistemas.postman.co/workspace/Taller-2---Arquitectura-de-Sist~c491820f-5aad-415f-8e6a-52eaa51fc838/collection/29661553-bfa1abdc-5887-4493-97e8-75d84c7016b6?action=share&source=collection_link&creator=29661553"
 	},
 	"item": [
 		{
@@ -17,11 +17,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/careers",
+							"raw": "{{API_GATEWAY_URL}}/api/careers",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"careers"
 							]
 						}
@@ -37,8 +38,9 @@
 								"exec": [
 									"const randomEmail = `testuser${Math.floor(Math.random() * 10000)}@ucn.cl`;\r",
 									"\r",
-									"pm.environment.set(\"email\", randomEmail);\r",
-									"pm.environment.set(\"password\", \"password123\");\r",
+									"pm.collectionVariables.set(\"email\", randomEmail);\r",
+									"pm.collectionVariables.set(\"password\", \"password123\");\r",
+									"console.log(\"Generated Email:\", randomEmail);\r",
 									"\r",
 									"function generateRut() {\r",
 									"    const numberBase = Math.floor(10000000 + Math.random() * 90000000).toString();\r",
@@ -65,7 +67,7 @@
 									"}\r",
 									"\r",
 									"const generatedRut = generateRut();\r",
-									"pm.environment.set(\"rut\", generatedRut);\r",
+									"pm.collectionVariables.set(\"rut\", generatedRut);\r",
 									"\r",
 									"console.log(\"Generated RUT:\", generatedRut);\r",
 									"\r",
@@ -79,15 +81,7 @@
 							"listen": "test",
 							"script": {
 								"exec": [
-									"let response = pm.response.json();\r",
-									"if (response.status === \"success\" && response.data.length > 1) {\r",
-									"  const subjects = response.data\r",
-									"  pm.collectionVariables.set(\"email\", email);\r",
-									"  pm.collectionVariables.set(\"password\", subjects[1].code);\r",
-									"} else {\r",
-									"  pm.collectionVariables.unset(\"email\");\r",
-									"  pm.collectionVariables.unset(\"password\");\r",
-									"}"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -107,11 +101,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/register",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/register",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"register"
 							]
@@ -138,7 +133,7 @@
 								"exec": [
 									"let response = pm.response.json();\r",
 									"if (response.token) {\r",
-									"  pm.environment.set(\"JWT\", response.token);\r",
+									"  pm.collectionVariables.set(\"JWT\", response.token);\r",
 									"}"
 								],
 								"type": "text/javascript",
@@ -159,11 +154,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"login"
 							]
@@ -178,11 +174,12 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const newPassword = \"Password1234\";\r",
+									"const oldPassword = pm.collectionVariables.get(\"password\")\r",
+									"const password = \"Password1234\";\r",
+									"pm.collectionVariables.set(\"oldPassword\", oldPassword)\r",
+									"pm.collectionVariables.set(\"password\", password);\r",
 									"\r",
-									"pm.environment.set(\"newPassword\", newPassword);\r",
-									"\r",
-									"console.log(\"Generated password:\", newPassword);\r",
+									"console.log(\"Generated password:\", password);\r",
 									""
 								],
 								"type": "text/javascript",
@@ -203,11 +200,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/update-password",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"update-password"
 							]
@@ -237,7 +235,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{newPassword}}\"\r\n}\r\n",
+							"raw": "{\r\n  \"email\": \"{{email}}\",\r\n  \"password\": \"{{password}}\"\r\n}\r\n",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -245,11 +243,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"login"
 							]
@@ -263,11 +262,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/apI/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"apI",
 								"users",
 								"profile"
 							]
@@ -289,9 +289,9 @@
 									"const randomFirstLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
 									"const randomSecondLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
 									"\r",
-									"pm.environment.set(\"name\", randomName);\r",
-									"pm.environment.set(\"firstLastName\", randomFirstLastName);\r",
-									"pm.environment.set(\"secondLastName\", randomSecondLastName);\r",
+									"pm.collectionVariables.set(\"name\", randomName);\r",
+									"pm.collectionVariables.set(\"firstLastName\", randomFirstLastName);\r",
+									"pm.collectionVariables.set(\"secondLastName\", randomSecondLastName);\r",
 									"\r",
 									"console.log(\"Generated Name:\", randomName);\r",
 									"console.log(\"Generated First Last Name:\", randomFirstLastName);\r",
@@ -316,11 +316,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
+							"raw": "{{API_GATEWAY_URL}}/api/users/update-profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"update-profile"
 							]
@@ -334,11 +335,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/api/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"profile"
 							]
@@ -794,7 +796,7 @@
 								"exec": [
 									"let response = pm.response.json();",
 									"if (response.token) {",
-									"  pm.environment.set(\"JWT\", response.token);",
+									"  pm.collectionVariables.set(\"JWT\", response.token);",
 									"}"
 								],
 								"type": "text/javascript",
@@ -805,9 +807,7 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const password = \"AnnaJackson\"\r",
-									"\r",
-									"pm.environment.set(\"password\", password);"
+									""
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -827,11 +827,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"login"
 							]
@@ -845,11 +846,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/api/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"profile"
 							]
@@ -870,8 +872,8 @@
 									"const randomName = names[Math.floor(Math.random() * names.length)];\r",
 									"const randomFirstLastName = lastNames[Math.floor(Math.random() * lastNames.length)];\r",
 									"\r",
-									"pm.environment.set(\"name\", randomName);\r",
-									"pm.environment.set(\"firstLastName\", randomFirstLastName);\r",
+									"pm.collectionVariables.set(\"name\", randomName);\r",
+									"pm.collectionVariables.set(\"firstLastName\", randomFirstLastName);\r",
 									"\r",
 									"console.log(\"Generated Name:\", randomName);\r",
 									"console.log(\"Generated First Last Name:\", randomFirstLastName);\r",
@@ -895,11 +897,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/users/update-profile",
+							"raw": "{{API_GATEWAY_URL}}/api/users/update-profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"update-profile"
 							]
@@ -913,11 +916,12 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/users/profile",
+							"raw": "{{API_GATEWAY_URL}}/api/users/profile",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"users",
 								"profile"
 							]
@@ -932,15 +936,17 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const name = pm.environment.get(\"name\");\r",
-									"const firstLastName = pm.environment.get(\"firstLastName\");\r",
+									"\r",
+									"const oldPassword = pm.collectionVariables.get(\"password\")\r",
+									"const name = pm.collectionVariables.get(\"name\");\r",
+									"const firstLastName = pm.collectionVariables.get(\"firstLastName\");\r",
 									"\r",
 									"const newPassword = `${name}${firstLastName}`;\r",
 									"\r",
-									"pm.environment.set(\"newPassword\", newPassword);\r",
+									"pm.collectionVariables.set(\"oldPassword\", oldPassword)\r",
+									"pm.collectionVariables.set(\"password\", newPassword);\r",
 									"\r",
-									"console.log(\"Name:\", name);\r",
-									"console.log(\"First Last Name:\", firstLastName);\r",
+									"\r",
 									""
 								],
 								"type": "text/javascript",
@@ -953,7 +959,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\",\r\n  \"confirmNewPassword\": \"{{newPassword}}\"\r\n}",
+							"raw": "{\r\n  \"oldPassword\": \"{{oldPassword}}\",\r\n  \"newPassword\": \"{{password}}\",\r\n  \"confirmNewPassword\": \"{{password}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -961,11 +967,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/update-password",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/update-password",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"update-password"
 							]
@@ -982,7 +989,7 @@
 								"exec": [
 									"let response = pm.response.json();",
 									"if (response.token) {",
-									"  pm.environment.set(\"JWT\", response.token);",
+									"  pm.collectionVariables.set(\"JWT\", response.token);",
 									"}"
 								],
 								"type": "text/javascript",
@@ -1013,11 +1020,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{API_GATEWAY_URL}}/auth/login",
+							"raw": "{{API_GATEWAY_URL}}/api/auth/login",
 							"host": [
 								"{{API_GATEWAY_URL}}"
 							],
 							"path": [
+								"api",
 								"auth",
 								"login"
 							]
@@ -1087,6 +1095,47 @@
 		{
 			"key": "subject2F3",
 			"value": "13668-035"
+		},
+		{
+			"key": "email",
+			"value": ""
+		},
+		{
+			"key": "password",
+			"value": ""
+		},
+		{
+			"key": "rut",
+			"value": ""
+		},
+		{
+			"key": "newPassword",
+			"value": ""
+		},
+		{
+			"key": "name",
+			"value": ""
+		},
+		{
+			"key": "firstLastName",
+			"value": ""
+		},
+		{
+			"key": "secondLastName",
+			"value": ""
+		},
+		{
+			"key": "JWT",
+			"value": ""
+		},
+		{
+			"key": "API_GATEWAY_URL",
+			"value": "",
+			"type": "default"
+		},
+		{
+			"key": "oldPassword",
+			"value": ""
 		}
 	]
 }
