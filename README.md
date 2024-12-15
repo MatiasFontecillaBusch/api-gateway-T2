@@ -7,7 +7,7 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
 #### Requisitos
 
 1. **Software necesario**:
-   - [Node.js](https://nodejs.org/) v16+
+   - [Node.js](https://nodejs.org/) v22+
    - [Docker](https://www.docker.com/) y Docker Compose
 
 #### Configuración de Entorno
