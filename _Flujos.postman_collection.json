@@ -174,13 +174,19 @@
 							"listen": "prerequest",
 							"script": {
 								"exec": [
-									"const oldPassword = pm.collectionVariables.get(\"password\")\r",
-									"const password = \"Password1234\";\r",
-									"pm.collectionVariables.set(\"oldPassword\", oldPassword)\r",
-									"pm.collectionVariables.set(\"password\", password);\r",
-									"\r",
-									"console.log(\"Generated password:\", password);\r",
-									""
+									"const newPassword = \"Password1234\"\r",
+									"pm.collectionVariables.set(\"newPassword\",newPassword)"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const newPassword = pm.collectionVariables.get(\"newPassword\")\r",
+									"pm.collectionVariables.set(\"password\", newPassword);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -937,17 +943,26 @@
 							"script": {
 								"exec": [
 									"\r",
-									"const oldPassword = pm.collectionVariables.get(\"password\")\r",
 									"const name = pm.collectionVariables.get(\"name\");\r",
 									"const firstLastName = pm.collectionVariables.get(\"firstLastName\");\r",
 									"\r",
 									"const newPassword = `${name}${firstLastName}`;\r",
 									"\r",
-									"pm.collectionVariables.set(\"oldPassword\", oldPassword)\r",
-									"pm.collectionVariables.set(\"password\", newPassword);\r",
+									"pm.collectionVariables.set(\"newPassword\", newPassword);\r",
 									"\r",
 									"\r",
 									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const newPassword = pm.collectionVariables.get(\"newPassword\")\r",
+									"pm.collectionVariables.set(\"password\", newPassword);"
 								],
 								"type": "text/javascript",
 								"packages": {}
@@ -959,7 +974,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"oldPassword\": \"{{oldPassword}}\",\r\n  \"newPassword\": \"{{password}}\",\r\n  \"confirmNewPassword\": \"{{password}}\"\r\n}",
+							"raw": "{\r\n  \"oldPassword\": \"{{password}}\",\r\n  \"newPassword\": \"{{newPassword}}\",\r\n  \"confirmNewPassword\": \"{{newPassword}}\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
