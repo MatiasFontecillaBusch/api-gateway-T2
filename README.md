@@ -23,6 +23,7 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
 1. **Clonar el repositorio**:
    ```bash
    git clone https://github.com/MatiasFontecillaBusch/api-gateway-T2.git
+   cd api-gateway-T2/
    ```
 
 2. **Instalar dependencias**:
