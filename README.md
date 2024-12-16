@@ -5,22 +5,12 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
 ---
 
 #### Requisitos
-
-1. **Software necesario**:
    - [Node.js](https://nodejs.org/) v22+
    - [Docker](https://www.docker.com/) y Docker Compose
 
-#### Configuración de Entorno
 
-1. **Variables de entorno**:
-   - Copia el archivo `.env.example` a `.env`:
-     ```bash
-     cp .env.example .env
-     ```
-   - Personaliza las variables si es necesario, NODE_ENV debe ser "production".
----
 
-2. **Componentes del entorno de Docker Compose**:
+### **Componentes del entorno de Docker Compose**:
    - **RabbitMQ**: Para manejo de colas de mensajes (puerto `5672` y consola de administración en `15672`).
    - **PostgreSQL**: Base de datos relacional (puerto `5432`).
    - **MongoDB**: Base de datos NoSQL (puerto `27017`).
@@ -39,15 +29,21 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
    ```bash
    npm install
    ```
-
-3. **Levantar servicios con Docker Compose**:
+3. **Variables de entorno**:
+   - Copia el archivo `.env.example` a `.env`:
+     ```bash
+     cp .env.example .env
+     ```
+   - Personaliza las variables si es necesario, NODE_ENV debe ser "production".
+---
+4. **Levantar servicios con Docker Compose**:
    ```bash
    docker-compose up -d
    ```
 
    Esto levantará los servicios definidos en el archivo `docker-compose.yml`.
 
-4. **Ejecutar el servidor Node.js**:
+5. **Ejecutar el servidor Node.js**:
    ```bash
    npm start
    ```
