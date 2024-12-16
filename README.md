@@ -53,5 +53,7 @@ Este proyecto es un **API Gateway** desarrollado en Node.js con Express que cent
    ```
 ---
 
-**Nota Importante:**
-Antes de ejecutar este proyecto, asegúrate de que todos los microservicios relacionados (**Access**, **Careers**, **Users**) están funcionando y accesibles en las URLs especificadas en las variables de entorno (`ACCESS_URL`, `CAREERS_URL`, `USERS_URL`). 
+**Notas Importante:**
+- El primer servicio que debe ser ejecutado es el de **Users**, sino, el servicio de **Access** no funcionará correctamente.
+- Antes de ejecutar este proyecto, asegúrate de que todos los microservicios relacionados (**Access**, **Careers**, **Users**) están funcionando y accesibles en las URLs especificadas en las variables de entorno (`ACCESS_URL`, `CAREERS_URL`, `USERS_URL`). 
+- Para ejecutar los flujos y la aplicación desde *Postman* se debe importar las colecciones y entornos que se encuentran en el proyecto.
